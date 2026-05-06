@@ -1,0 +1,63 @@
+import React from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Platform,
+  StatusBar,
+  SafeAreaView,
+} from "react-native";
+
+export default function Ex05() {
+  return (
+    <SafeAreaView style={styles.container}>
+      <StatusBar
+        barStyle={Platform.OS === "ios" ? "dark-content" : "light-content"}
+        backgroundColor={Platform.OS === "android" ? "#2980b9" : "transparent"}
+      />
+      <View style={styles.header}>
+        <Text style={styles.headerText}>header</Text>
+      </View>
+      <View style={styles.content}>
+        <Text>ios e android</Text>
+      </View>
+    </SafeAreaView>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  header: {
+    height: Platform.OS === "ios" ? 50 : 60,
+    ...Platform.select({
+      ios: {
+        backgroundColor: "#fff",
+        justifyContent: "center",
+        alignItems: "center",
+        borderBottomWidth: 1,
+        borderBottomColor: "#e0e0e0",
+      },
+      android: {
+        backgroundColor: "#2980b9",
+        justifyContent: "center",
+        alignItems: "flex-start",
+        paddingLeft: 20,
+      },
+    }),
+  },
+  headerText: {
+    fontSize: 18,
+    fontWeight: "bold",
+    ...Platform.select({
+      ios: { color: "#000" },
+      android: { color: "#fff" },
+    }),
+  },
+  content: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+});
